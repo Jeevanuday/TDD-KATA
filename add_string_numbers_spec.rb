@@ -30,5 +30,32 @@ describe 'add_string_numbers' do
         it 'return 6 when given "1\n2\n3"' do
             expect(add_number("1\n2\n3")).to eq(6)
         end
+        it 'return error when given "1,\n"' do
+            expect(add_number("1,\n")).to eq('Invalid input')
+        end
+    end
+
+    context 'when custom delimiter is passed' do
+        it 'return 3 when given "//;\n1;2"' do
+            expect(add_number("//;\n1;2")).to eq(3)
+        end
+        it 'return 6 when given "//;\n1;2;3"' do
+            expect(add_number("//;\n1;2;3")).to eq(6)
+        end
+        it 'return error when given "//;\n1;\n"' do       
+            expect(add_number("//;\n1;\n")).to eq('Invalid input')
+        end
+    end
+
+    context 'when negative numbers are passed' do
+        it 'return error when given "-1"' do
+            expect(add_number('-1')).to eq('Negatives not allowed: -1')
+        end
+        it 'return error when given "-1,-2"' do
+            expect(add_number('-1,-2')).to eq('Negatives not allowed: -1, -2')
+        end
+        it 'return error when given "//;\n-1;2;-3"' do
+            expect(add_number("//;\n-1;2;-3")).to eq('Negatives not allowed: -1, -3')
+        end
     end
 end
