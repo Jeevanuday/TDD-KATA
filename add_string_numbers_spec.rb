@@ -58,4 +58,16 @@ describe 'add_string_numbers' do
             expect(add_number("//;\n-1;2;-3")).to eq('Negatives not allowed: -1, -3')
         end
     end
+
+    context 'when number is greater than 1000' do     
+        it 'return 2 when given "2,1001"' do
+            expect(add_number('2,1001')).to eq(2)
+        end
+        it 'return 3 when given "1,2,1001"' do
+            expect(add_number('1,2,1001')).to eq(3)
+        end
+        it 'return 6 when given "1,2,1001,3"' do
+            expect(add_number('1,2,1001,3')).to eq(6)
+        end
+    end
 end

@@ -7,9 +7,13 @@ def add_number(string)
     end
     new_line_check = string.include?("\n")
     return 'Invalid input' if string.include?("#{delimiter}\n") || string.include?("\n#{delimiter}")
+    
     string = string.gsub("\n", delimiter) if new_line_check
     numbers = string.split(delimiter).map(&:to_i)
     negative_numbers = numbers.select { |num| num < 0 }
     return "Negatives not allowed: #{negative_numbers.join(', ')}" if negative_numbers.any?
+
+    remove_big_numbers = numbers.select { |num| num > 1000 }
+    numbers = numbers - remove_big_numbers
     numbers.reduce(:+)
 end
